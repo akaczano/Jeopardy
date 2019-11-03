@@ -1,0 +1,74 @@
+﻿@page
+@model GameBoardModel
+@{
+    ViewData["Title"] = "Game Board";
+
+
+}
+
+
+<script>
+    function questionClicked(question, answer, value, id) {
+
+        document.getElementById(id).innerHTML = ""
+        document.getElementById("board").style.display = "none";
+        document.getElementById("questionText").innerHTML += question;
+        document.getElementById("answerText").innerHTML += answer;
+        document.getElementById("answerText").style.display = "none"
+        document.getElementById("showQuestion").style.display = "";
+    }
+
+    function showAnswer() {
+        document.getElementById("answerText").style.display = "";
+    }
+
+    function back() {
+        document.getElementById("showQuestion").style.display = "none";
+        document.getElementById("board").style.display = "";
+        document.getElementById("questionText").innerHTML = "Question: ";
+        document.getElementById("answerText").innerHTML = "Answer: ";
+    }
+
+</script>
+
+@{
+    var board = Model.GetDisplay();
+    string columnStyle = "";
+    for (int i = 0; i < board.GetLength(1); i++)
+    {
+        columnStyle += "auto ";
+    }
+    var data = Model.GameBoard;
+}
+
+
+<div id="showQuestion">
+    <p id="questionText">Question: </p>
+    <p id="answerText">Answer: </p>
+    <button class="col-sm-2" onclick="showAnswer()">Show Answer</button>
+    <button class="col-sm-2" onclick="back()">Back to game board</button>
+
+</div>
+
+<script>
+    document.getElementById("showQuestion").style.display = "none";
+</script>
+
+<div id="board" class="grid-container" style="grid-template-columns:@columnStyle;">
+
+    @for (int j = 0; j < board.GetLength(0); j++)
+    {
+        @for (int i = 0; i < board.GetLength(1); i++)
+        {
+
+            if (j != 0 && data[j, i].question == null)
+                continue;
+
+            <div id =" @j@i "class="grid-item" @if(j!=0){ <text>onclick="questionClicked(&quot @data[j,i].question.ToString().Replace("\"", "\\\"") &quot,
+                &quot @data[j,i].answer &quot, &quot @board[j,i] &quot, &quot @j@i &quot)"</text> } >
+
+                @board[j, i]
+            </div>
+        }
+    }
+</div>

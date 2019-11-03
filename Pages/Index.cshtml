@@ -1,0 +1,115 @@
+﻿@page
+@model IndexModel
+
+@{
+    ViewData["Title"] = "Home page";
+
+}
+<head>
+
+    <link rel="stylesheet" href="~/css/card.css" />
+
+</head>
+
+
+<h2>Find Questions</h2>
+
+
+<div class="row">
+    <div class="container-fluid">
+        <form method="post">
+
+            <div class="row">
+                <div class="form-group col-sm-4">
+                    <label asp-for="SearchString">Category</label>
+                    <input class="form-control" type="search" asp-for="SearchString" />
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="form-group col-sm-2">
+                    <label asp-for="MinDate">Min date</label>
+
+                    <input class="form-control" asp-for="MinDate" type="date" value="yyyy-mm-dd" />
+
+                </div>
+                <div class="form-group col-sm-2">
+                    <label asp-for="MaxDate">Max date</label>
+                    <input class="form-control" asp-for="MaxDate" type="date" value="yyyy-mm-dd" />
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="form-group col-sm-4">
+                    <label asp-for="Value">Value ($)</label>
+                    <select class="form-control" asp-for="Value" asp-items="Model.VALUES"></select>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="form-group col-sm-4">
+                    <input type="submit" value="Find Questions" />
+                </div>
+            </div>
+
+        </form>
+    </div>
+</div>
+
+<script>
+
+    function showAnswer() {
+        document.getElementById(id).innerHTML = "Answer: " + answer;
+    }
+</script>
+
+<!--
+<link rel="stylesheet" href="~/css/bootstrap.css" />
+<link rel="stylesheet" href="~/css/card.css" />
+<link rel="stylesheet" href="~/css/global.css" />
+  -->
+<script>
+
+    function showAnswer(i) {
+        document.getElementById("answer" + i).style.display = "";
+        document.getElementById("show-answer" + i).style.display = "none";
+    }
+
+
+</script>
+
+@{
+
+    int i = 0;
+}
+@foreach (var q in Model.Questions)
+{
+<div class="row">
+    <div align="center" class="container">
+        <div class="col-sm-7 col-sm-offset-3">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title"> @q.category.title <span class="badge badge-success">$@q.value</span></h3>
+                </div>
+                <div class="panel-body">
+                    <p><strong>Question:</strong> @q.question </p>
+                    <hr />
+
+                    <p>
+                        <strong>Answer: </strong>
+                        <a onclick="showAnswer(@(++i))" class="btn btn-sm btn-default" id="show-answer@(i)">Show</a>
+                        <span id="answer@(i)" style="display: none"> @q.answer </span>
+                    </p>
+                    <small class="pull-right"><em>Airdate: @q.airdate </em></small>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+}
+
+
+
+
