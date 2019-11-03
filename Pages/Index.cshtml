@@ -1,115 +1,96 @@
 ﻿@page
 @model IndexModel
-
 @{
     ViewData["Title"] = "Home page";
-
 }
-<head>
 
-    <link rel="stylesheet" href="~/css/card.css" />
-
-</head>
-
-
-<h2>Find Questions</h2>
-
-
-<div class="row">
-    <div class="container-fluid">
-        <form method="post">
-
-            <div class="row">
-                <div class="form-group col-sm-4">
-                    <label asp-for="SearchString">Category</label>
-                    <input class="form-control" type="search" asp-for="SearchString" />
-                </div>
+<div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="6000">
+    <ol class="carousel-indicators">
+        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+        <li data-target="#myCarousel" data-slide-to="1"></li>
+        <li data-target="#myCarousel" data-slide-to="2"></li>
+    </ol>
+    <div class="carousel-inner" role="listbox">
+        <div class="item active">
+            <img src="~/images/banner1.svg" alt="ASP.NET" class="img-responsive" />
+            <div class="carousel-caption" role="option">
+                <p>
+                    Learn how to build ASP.NET apps that can run anywhere.
+                    <a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkID=525028&clcid=0x409">
+                        Learn More
+                    </a>
+                </p>
             </div>
-
-            <div class="row">
-                <div class="form-group col-sm-2">
-                    <label asp-for="MinDate">Min date</label>
-
-                    <input class="form-control" asp-for="MinDate" type="date" value="yyyy-mm-dd" />
-
-                </div>
-                <div class="form-group col-sm-2">
-                    <label asp-for="MaxDate">Max date</label>
-                    <input class="form-control" asp-for="MaxDate" type="date" value="yyyy-mm-dd" />
-                </div>
+        </div>
+        <div class="item">
+            <img src="~/images/banner2.svg" alt="Visual Studio" class="img-responsive" />
+            <div class="carousel-caption" role="option">
+                <p>
+                    There are powerful new features in Visual Studio for building modern web apps.
+                    <a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkID=525030&clcid=0x409">
+                        Learn More
+                    </a>
+                </p>
             </div>
-
-            <div class="row">
-                <div class="form-group col-sm-4">
-                    <label asp-for="Value">Value ($)</label>
-                    <select class="form-control" asp-for="Value" asp-items="Model.VALUES"></select>
-                </div>
+        </div>
+        <div class="item">
+            <img src="~/images/banner3.svg" alt="Microsoft Azure" class="img-responsive" />
+            <div class="carousel-caption" role="option">
+                <p>
+                    Learn how Microsoft's Azure cloud platform allows you to build, deploy, and scale web apps.
+                    <a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkID=525027&clcid=0x409">
+                        Learn More
+                    </a>
+                </p>
             </div>
-
-            <div class="row">
-                <div class="form-group col-sm-4">
-                    <input type="submit" value="Find Questions" />
-                </div>
-            </div>
-
-        </form>
-    </div>
-</div>
-
-<script>
-
-    function showAnswer() {
-        document.getElementById(id).innerHTML = "Answer: " + answer;
-    }
-</script>
-
-<!--
-<link rel="stylesheet" href="~/css/bootstrap.css" />
-<link rel="stylesheet" href="~/css/card.css" />
-<link rel="stylesheet" href="~/css/global.css" />
-  -->
-<script>
-
-    function showAnswer(i) {
-        document.getElementById("answer" + i).style.display = "";
-        document.getElementById("show-answer" + i).style.display = "none";
-    }
-
-
-</script>
-
-@{
-
-    int i = 0;
-}
-@foreach (var q in Model.Questions)
-{
-<div class="row">
-    <div align="center" class="container">
-        <div class="col-sm-7 col-sm-offset-3">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h3 class="panel-title"> @q.category.title <span class="badge badge-success">$@q.value</span></h3>
-                </div>
-                <div class="panel-body">
-                    <p><strong>Question:</strong> @q.question </p>
-                    <hr />
-
-                    <p>
-                        <strong>Answer: </strong>
-                        <a onclick="showAnswer(@(++i))" class="btn btn-sm btn-default" id="show-answer@(i)">Show</a>
-                        <span id="answer@(i)" style="display: none"> @q.answer </span>
-                    </p>
-                    <small class="pull-right"><em>Airdate: @q.airdate </em></small>
-                </div>
-            </div>
-
         </div>
     </div>
+    <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+    </a>
+    <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+    </a>
 </div>
 
-}
-
-
-
-
+<div class="row">
+    <div class="col-md-3">
+        <h2>Application uses</h2>
+        <ul>
+            <li>Sample pages using ASP.NET Core Razor Pages</li>
+            <li>Theming using <a href="https://go.microsoft.com/fwlink/?LinkID=398939">Bootstrap</a></li>
+        </ul>
+    </div>
+    <div class="col-md-3">
+        <h2>How to</h2>
+        <ul>
+            <li><a href="https://go.microsoft.com/fwlink/?linkid=852130">Working with Razor Pages.</a></li>
+            <li><a href="https://go.microsoft.com/fwlink/?LinkId=699315">Manage User Secrets using Secret Manager.</a></li>
+            <li><a href="https://go.microsoft.com/fwlink/?LinkId=699316">Use logging to log a message.</a></li>
+            <li><a href="https://go.microsoft.com/fwlink/?LinkId=699317">Add packages using NuGet.</a></li>
+            <li><a href="https://go.microsoft.com/fwlink/?LinkId=699319">Target development, staging or production environment.</a></li>
+        </ul>
+    </div>
+    <div class="col-md-3">
+        <h2>Overview</h2>
+        <ul>
+            <li><a href="https://go.microsoft.com/fwlink/?LinkId=518008">Conceptual overview of what is ASP.NET Core</a></li>
+            <li><a href="https://go.microsoft.com/fwlink/?LinkId=699320">Fundamentals of ASP.NET Core such as Startup and middleware.</a></li>
+            <li><a href="https://go.microsoft.com/fwlink/?LinkId=398602">Working with Data</a></li>
+            <li><a href="https://go.microsoft.com/fwlink/?LinkId=398603">Security</a></li>
+            <li><a href="https://go.microsoft.com/fwlink/?LinkID=699321">Client side development</a></li>
+            <li><a href="https://go.microsoft.com/fwlink/?LinkID=699322">Develop on different platforms</a></li>
+            <li><a href="https://go.microsoft.com/fwlink/?LinkID=699323">Read more on the documentation site</a></li>
+        </ul>
+    </div>
+    <div class="col-md-3">
+        <h2>Run &amp; Deploy</h2>
+        <ul>
+            <li><a href="https://go.microsoft.com/fwlink/?LinkID=517851">Run your app</a></li>
+            <li><a href="https://go.microsoft.com/fwlink/?LinkID=517853">Run tools such as EF migrations and more</a></li>
+            <li><a href="https://go.microsoft.com/fwlink/?LinkID=398609">Publish to Microsoft Azure App Service</a></li>
+        </ul>
+    </div>
+</div>
